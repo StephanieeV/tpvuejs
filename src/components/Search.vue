@@ -1,11 +1,21 @@
 <template>
   <div>
-    <label>Rechercher des films par année, titre ou realisateur</label>
-    <br />
-    <input type="text" v-model="champ_tri" />
-    <ul>
-      <li v-for="n in trie" :key="n.num">{{ n.titre }} - {{ n.annee }}</li>
-    </ul>
+    <v-form>
+      <v-container>
+        <v-row>
+          <v-col cols="12" sm="6" md="4">
+            <label>Rechercher des films par année, titre ou realisateur</label>
+            <br />
+            <v-text-field type="text" label="Rechercher un film !" v-model="champ_tri"></v-text-field>
+            <ul>
+              <li v-for="n in trie" :key="n.num">
+                <a v-bind:href="'/#/movie/'+n.num">{{ n.titre }} - {{ n.annee }}</a>
+              </li>
+            </ul>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-form>
   </div>
 </template>
 
@@ -16,12 +26,6 @@ export default {
     return {
       shared_data: window.shared_data,
 
-      // nom: "",
-      // prenom: "",
-      // nationalite: "",
-      // date_de_naissance: "",
-      // genre: "",
-      // realisateur: "",
       display: false,
       tri_annee: "",
       champ_tri: ""

@@ -1,34 +1,28 @@
 <template>
   <div>
-    <label>Titre</label>
-    <input v-model="movie.titre" />
-    <br />
-    <label>Année</label>
-    <input v-model="movie.annee" />
-    <br />
-    <label>Langue</label>
-    <input v-model="movie.langue" />
-    <br />
-    <label>Realisateur</label>
-    <br />
-    <label>Nom</label>
-    <input v-model="movie.realisateur.nom" />
-    <label>Prenom</label>
-    <input v-model="movie.realisateur.prenom" />
-    <label>Nationalité</label>
-    <input v-model="movie.realisateur.nationalite" />
-    <label>Date de naissance</label>
-    <input v-model="movie.realisateur.date_de_naissance" />
-    <br />
-    <label>Resumé</label>
-    <input v-model="movie.resume" />
-    <br />
-    <label>Url du poster</label>
-    <input v-model="movie.url" />
-    <br />
-    <a href="/">
-      <button v-on:click="ajouterFilm">Ajouter un film</button>
-    </a>
+    <h2>Ajouter un film</h2>
+    <v-form>
+      <v-container>
+        <v-row>
+          <v-col cols="12" sm="6" md="4">
+            <h3>Film</h3>
+            <v-text-field v-model="movie.titre" label="Titre"></v-text-field>
+            <v-text-field v-model="movie.annee" label="Année"></v-text-field>
+            <v-text-field v-model="movie.url" label="Url du poster"></v-text-field>
+            <v-text-field v-model="movie.resume" label="Résumé"></v-text-field>
+            <v-text-field v-model="movie.genre" label="Genre"></v-text-field>
+            <v-text-field v-model="movie.langue" label="Langue"></v-text-field>
+
+            <h3>Realisateur</h3>
+            <v-text-field v-model="movie.realisateur.nom" label="Nom"></v-text-field>
+            <v-text-field v-model="movie.realisateur.prenom" label="Prenom"></v-text-field>
+            <v-text-field v-model="movie.realisateur.nationalite" label="Nationalité"></v-text-field>
+            <v-text-field v-model="movie.realisateur.date_de_naissance" label="Date de naissance"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-btn v-on:click="ajouterFilm">Ajouter un film</v-btn>
+      </v-container>
+    </v-form>
   </div>
 </template>
 
@@ -53,8 +47,10 @@ export default {
         url: "",
         genre: "",
         display: false,
-        tri_annee: "",
-        champ_tri: ""
+        notation: {
+          note: "",
+          commentaire: ""
+        }
       }
     };
   },
@@ -65,7 +61,7 @@ export default {
   },
   computed: {
     num: function() {
-      return this.shared_data.movies.length;
+      return this.shared_data.movies.length + 1;
     }
   }
 };

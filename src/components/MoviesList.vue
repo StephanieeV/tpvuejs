@@ -1,63 +1,70 @@
 <template>
   <div>
+    <v-bottom-navigation :value="activeBtn" color="primary" horizontal>
+      <v-btn>
+        <span>
+          <a v-bind:href="'/#/'">Accueil</a>
+        </span>
+      </v-btn>
+    </v-bottom-navigation>
     <h2>{{ message }}</h2>
-
-    <!-- <span v-on="compter">Il y a {{ compter }} films enregistrés.</!-->
-
     <hr />
     <Search></Search>
     <hr />
 
-    <ul>
-      <li v-for="(m, i) in shared_data.movies" :key="m.num">
-        <img v-bind:src="m.url" style="width:100px" />
-        <span
-          v-on:click="afficher_infos(i)"
-        >{{ m.num }} - Titre: {{ m.titre }} - Année de sortie: {{ m.annee }}</span>
-        <br />
-        <router-link to="/movie/:var">
-          <button>Détails</button>
-        </router-link>
-        <router-link to="/movie/3">
-          <button>Détailllllls</button>
-        </router-link>
-        <router-link to="{ path: '/movie/:var', params: { var: 1 }}">CLICK</router-link>
-
-        <span v-if="m.display">
-          <u>Détails:</u>
-          <br />
-          Langue: {{ m.langue }} - Genre: {{m.genre}} -
-          Résumé: {{ m.resume }} - Poster:
-          <a
-            v-bind:href="m.url"
-          >Lien vers le poster</a>
-          -
-          Réalisateur:
-          - Nom: {{ m.realisateur.nom }}
-          - Prenom: {{ m.realisateur.prenom }}
-          - Nationalité: {{ m.realisateur.nationalite }}
-          - Date de naissance: {{ m.realisateur.date_de_naissance }}
+    <div v-for="(m) in shared_data.movies" :key="m.num">
+      <v-card class="mx-auto" max-width="400">
+        <!-- <v-img
+          class="white--text align-end"
+          height="200px"
+          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+        >-->
+        <span v-if="m.url">
+          <img v-bind:src="m.url" style="width:100px" />
         </span>
-      </li>
-    </ul>
-    <router-link to="/add">
-      <button>Ajouter un film à la liste</button>
-    </router-link>
+        <v-card-title>
+          <a v-bind:href="'/#/movie/'+m.num">{{ m.titre }}</a>
+        </v-card-title>
+        <!-- </v-img> -->
+
+        <v-card-subtitle class="pb-0">{{ m.annee }}</v-card-subtitle>
+
+        <v-card-text class="text--primary">
+          Langue: {{ m.langue }}
+          <br />
+          Genre: {{m.genre}}
+          <br />
+          Réalisateur: {{ m.realisateur.nom }} {{ m.realisateur.prenom }}
+        </v-card-text>
+
+        <v-card-actions>
+          <a v-bind:href="'/#/movie/'+m.num">
+            <v-btn class="button">Détails</v-btn>
+          </a>
+        </v-card-actions>
+      </v-card>
+    </div>
+
+    <hr />
+    <Add></Add>
   </div>
 </template>
 
 <script>
 import Search from "./Search.vue";
+import Add from "./Add.vue";
+
 export default {
   name: "MoviesList",
   components: {
-    Search
+    Search,
+    Add
   },
   data() {
     return {
       shared_data: window.shared_data,
       message: "Voici la liste des films !",
-
+      link: "/#/movie/",
       tri_annee: "",
       champ_tri: ""
     };
@@ -74,3 +81,11 @@ export default {
   }
 };
 </script>
+<style>
+div {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+input {
+  border: darkgray;
+}
+</style>

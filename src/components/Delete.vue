@@ -7,12 +7,8 @@
     </!-->
 
     <router-link :to="{name: 'accueil'}">
-      <button v-on:click="suppFilm">Supprimer ce film</button>
+      <v-btn v-on:click="suppFilm">Supprimer ce film</v-btn>
     </router-link>
-
-    <router-link
-      :to="{name: 'product-delete', params: {product_id: this.shared_data.movies.num}}"
-    >Delete</router-link>
   </div>
 </template>
 
@@ -26,10 +22,7 @@ export default {
   },
   methods: {
     suppFilm: function() {
-      //   this.shared_data.movies.splice(this.index, 1);
-      //   this.$route.params.product_id
-      // this.shared_data.movies.splice(this.$route.params.var, 1);
-      this.shared_data.movies.splice(this.$route.params.product_id, 1);
+      this.shared_data.movies.splice(this.$route.params.var - 1, 1);
     }
   }
 };

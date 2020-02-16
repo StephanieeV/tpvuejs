@@ -1,28 +1,22 @@
 import Vue from "vue";
-// import Vuetify from "vuetify";
-// import "vuetify/dist/vuetify.min.css";
+import Vuetify from "vuetify";
+import "vuetify/dist/vuetify.min.css";
 import App from "./App.vue";
 import VueRouter from "vue-router";
-import Add from "./components/Add.vue";
 import Edit from "./components/Edit.vue";
-import Delete from "./components/Delete.vue";
 import Movie from "./components/Movie.vue";
+import Rating from "./components/Rating.vue";
 import MoviesList from "./components/MoviesList.vue";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
-// Vue.use(Vuetify);
+Vue.use(Vuetify);
 
 const routes = [
   { path: "/", component: MoviesList, name: "accueil" },
-  { path: "/add", component: Add, name: "ajouter" },
   { path: "/movie/:var/edit", component: Edit, name: "editer" },
-  { path: "/movie/:var", component: Movie, name: "details" },
-  {
-    path: "/movie/:product_id/delete",
-    component: Delete,
-    name: "product-delete"
-  }
+  { path: "/movie/:var", name: "details", component: Movie },
+  { path: "/movie/:var/notation", name: "notation", component: Rating }
 ];
 
 const router = new VueRouter({
@@ -46,8 +40,11 @@ window.shared_data = {
       resume: "bateau qui coule",
       genre: "Historique",
       urll: "",
-      // realisateur: "",
-      display: false
+      display: false,
+      notation: {
+        note: "3",
+        commentaire: ""
+      }
     },
     {
       num: 2,
@@ -60,11 +57,14 @@ window.shared_data = {
         nationalite: "fr",
         date_de_naissance: "01/01/1918"
       },
-      // realisateur: "",
       resume: "avatar monde parallele",
       genre: "Historique",
       url: "",
-      display: false
+      display: false,
+      notation: {
+        note: "",
+        commentaire: ""
+      }
     },
     {
       num: 3,
@@ -77,12 +77,15 @@ window.shared_data = {
         nationalite: "fr",
         date_de_naissance: "01/01/1918"
       },
-      // realisateur: "",
       genre: "Historique",
       resume: "soupe et homme de l'espace",
       url:
         "http://fr.web.img2.acsta.net/medias/nmedia/18/36/11/21/18478117.jpg",
-      display: false
+      display: false,
+      notation: {
+        note: "",
+        commentaire: ""
+      }
     }
   ],
   num: 0,
@@ -93,12 +96,10 @@ window.shared_data = {
   realisateur: { nom: "", prenom: "", nationalite: "", date_de_naissance: "" },
   resume: "",
   url: "",
-  // nom: "",
-  // prenom: "",
-  // nationalite: "",
-  // date_de_naissance: "",
-  // genre: "",
-  // realisateur: "",
+  notation: {
+    note: "",
+    commentaire: ""
+  },
   display: false,
   tri_annee: "",
   champ_tri: ""
