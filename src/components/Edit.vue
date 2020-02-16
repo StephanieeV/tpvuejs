@@ -8,7 +8,7 @@
       </v-btn>
       <v-btn>
         <span>
-          <a v-bind:href="'/#/movie/'+m.num">Retourner sur le film</a>
+          <a v-bind:href="'/#/movie/'+movie.num">Retourner sur le film</a>
         </span>
       </v-btn>
     </v-bottom-navigation>
@@ -32,7 +32,9 @@
             <v-text-field v-model="movie.realisateur.date_de_naissance" label="Date de naissance"></v-text-field>
           </v-col>
         </v-row>
-        <v-btn v-on:click="modifierFilm">Modifier</v-btn>
+        <a v-bind:href="'/#/'">
+          <v-btn v-on:click="modifierFilm">Modifier</v-btn>
+        </a>
       </v-container>
     </v-form>
   </div>
